@@ -6,8 +6,11 @@ data/
 
 # Trained model weights — 50–517 MB each, ship via GitHub Releases
 # or Hugging Face Hub and link from the README.
-models/
-app/models/
+# Root /models/ is fully ignored (it's the local training-time dump).
+# app/models/* ignores binary weights but keeps the folder + README in git.
+/models/
+app/models/*
+!app/models/README.md
 *.pth
 *.pt
 *.ckpt
