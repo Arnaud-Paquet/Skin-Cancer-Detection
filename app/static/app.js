@@ -63,6 +63,7 @@
         errorEl.textContent = '';
         fileInput.value = '';
         rankedList.innerHTML = '';
+        document.getElementById('concern-label').textContent = 'Melanoma concern';
         _originalDataURL = null;
         _overlayDataURL  = null;
         resultImage.dataset.showing = 'overlay';
@@ -152,6 +153,20 @@
         concernPmel.textContent = `p(melanoma) = ${(data.melanoma_concern.p_mel * 100).toFixed(1)}%`;
         concernDescription.textContent = data.melanoma_concern.description;
 
+        // BCC override — p_mel is low when BCC is predicted, but BCC is malignant.
+        // Escalate to high concern and relabel the banner so it doesn't mislead.
+        if (data.top_class.abbr === 'bcc') {
+            const bccConcern = CONCERN_DISPLAY['high'];
+            concernBanner.className =
+                `fade-in mb-4 rounded-card border px-5 py-4 flex items-start gap-3 ` +
+                `${bccConcern.bg} ${bccConcern.text} ${bccConcern.border}`;
+            document.getElementById('concern-label').textContent = 'Cancer concern';
+            concernLevel.textContent   = 'High concern';
+            concernPmel.textContent    = `p(BCC) = ${(data.confidence * 100).toFixed(1)}%`;
+            concernDescription.textContent =
+                'Basal cell carcinoma is a malignant skin cancer. Dermatology consultation recommended.';
+        }
+
         // Low-confidence banner — orthogonal to the concern band. Shown when the
         // top-class probability stays below the threshold set in config.py.
         if (data.confidence < window.LOW_CONFIDENCE_THRESHOLD) {
@@ -168,9 +183,10 @@
             const pPct  = (row.p * 100).toFixed(1);
 
             const item = document.createElement('div');
-            item.className = `grid items-center gap-2.5 ${isTop ? '' : 'opacity-90'}`;
+            item.className = `ds-tooltip grid items-center gap-2.5 ${isTop ? '' : 'opacity-90'}`;
             item.style.gridTemplateColumns = '140px 1fr 48px';
             item.innerHTML = `
+                <span class="ds-tip">${row.note}</span>
                 <span class="text-[12.5px] truncate ${isTop ? 'text-ink font-semibold' : 'text-ink-soft'}">
                     ${row.full}
                     <span class="font-mono text-[10.5px] text-ink-mute">${row.code}</span>

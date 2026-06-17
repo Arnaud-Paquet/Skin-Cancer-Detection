@@ -119,6 +119,7 @@ def predict():
         {
             'code': config.CODE_BY_INDEX[i],
             'full': config.CLASS_NAMES[config.CODE_BY_INDEX[i]],
+            'note': config.CLASS_NOTES[config.CODE_BY_INDEX[i]],
             'p':    float(avg_probs[i]),
         }
         for i in order

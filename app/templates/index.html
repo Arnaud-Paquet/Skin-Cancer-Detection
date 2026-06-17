@@ -42,6 +42,15 @@
       @keyframes ds-spin { to { transform: rotate(360deg); } }
       .fade-in { animation: ds-fade 0.4s ease; }
       @keyframes ds-fade { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+      .ds-tooltip { position: relative; }
+      .ds-tooltip .ds-tip {
+        display: none; position: absolute; bottom: calc(100% + 6px); left: 50%;
+        transform: translateX(-50%); white-space: nowrap;
+        background: #16202c; color: #e8eef4; font-size: 11.5px; font-family: 'IBM Plex Sans', sans-serif;
+        padding: 4px 9px; border-radius: 6px; pointer-events: none; z-index: 10;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.18);
+      }
+      .ds-tooltip:hover .ds-tip { display: block; }
     </style>
 </head>
 <body class="bg-canvas text-ink antialiased min-h-screen flex flex-col">
@@ -206,7 +215,7 @@
                     </svg>
                     <div class="flex-1 min-w-0">
                         <div class="flex items-baseline gap-2 flex-wrap">
-                            <span class="font-mono text-[10.5px] tracking-wider uppercase opacity-70">Melanoma concern</span>
+                            <span id="concern-label" class="font-mono text-[10.5px] tracking-wider uppercase opacity-70">Melanoma concern</span>
                             <span id="concern-level" class="font-semibold text-[15px]"></span>
                             <span class="text-[12.5px] opacity-70">·</span>
                             <span id="concern-pmel" class="font-mono text-[12.5px] opacity-80"></span>
