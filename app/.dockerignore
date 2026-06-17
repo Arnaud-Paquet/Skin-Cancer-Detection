@@ -1,0 +1,60 @@
+# ─── Python bytecode ──────────────────────────────────────────────────
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.pyc
+
+# ─── macOS artefacts ──────────────────────────────────────────────────
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# ─── Editor / IDE ─────────────────────────────────────────────────────
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# ─── Claude / AI tooling ──────────────────────────────────────────────
+.claude/
+CLAUDE.md
+
+# ─── Git ──────────────────────────────────────────────────────────────
+.git/
+.gitignore
+.gitattributes
+
+# ─── Development notebook (not needed at runtime) ─────────────────────
+../notebook/
+notebook/
+
+# ─── Extra model checkpoints outside the app/models/ directory ────────
+# The ONLY weight file needed is models/best_efficientnet_v2_s.pth (~79 MB).
+# All other checkpoints from ../models/ are excluded at the Docker build
+# context level because .dockerignore is applied relative to the build
+# context root (app/).  The context itself should be app/, not the parent.
+../models/
+
+# ─── Data (large; not part of the runtime) ────────────────────────────
+../data/
+data/
+
+# ─── Test / CI artefacts ──────────────────────────────────────────────
+.pytest_cache/
+htmlcov/
+.coverage
+*.cover
+
+# ─── Temporary / log files ────────────────────────────────────────────
+*.log
+*.tmp
+tmp/
+
+# ─── Docker-in-Docker safety ──────────────────────────────────────────
+Dockerfile
+.dockerignore
+
+# ─── Deploy docs (not needed in the image) ────────────────────────────
+DEPLOY.md

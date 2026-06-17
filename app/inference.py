@@ -11,7 +11,7 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 from PIL import Image
-from matplotlib import cm
+import matplotlib
 from torchvision import models, transforms
 
 
@@ -195,7 +195,9 @@ def build_overlay(original_pil, cam_2d, alpha=0.45):
 
     # RdYlBu reversed: navy → cyan → green → yellow → orange → red.
     # Matches the legend gradient shown in the UI.
-    cmap = cm.get_cmap('RdYlBu_r')
+    # `matplotlib.colormaps[...]` is the post-3.9 replacement for the removed
+    # `matplotlib.cm.get_cmap(...)` — same return type (a Colormap instance) since HF is running on 3.11.
+    cmap = matplotlib.colormaps['RdYlBu_r']
     heat_rgb = (cmap(cam_resized)[..., :3] * 255).astype(np.uint8)
 
     orig_rgb = np.array(original_pil.convert('RGB'))

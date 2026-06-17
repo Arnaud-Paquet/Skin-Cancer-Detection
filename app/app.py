@@ -1,4 +1,4 @@
-"""Flask entry point for DermaScan.
+"""Flask entry point for NaeviScan.
 
   - /         serves the one-page UI
   - /predict  accepts a multipart image, returns JSON:

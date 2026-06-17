@@ -1,4 +1,4 @@
-"""Configuration for the DermaScan web app.
+"""Configuration for the NaeviScan web app.
 
 The production model is EfficientNetV2-S, trained on HAM10000 with a
 lesion-grouped 70/15/15 split. The numbers in MODEL_INFO are evaluated on
@@ -13,6 +13,9 @@ WINNER_MODEL = 'efficientnet_v2_s'
 WEIGHTS_PATH = './models/best_efficientnet_v2_s.pth'
 
 # Number of TTA augmented views averaged at inference (plus 1 clean pass).
+# Matches the notebook's training-time TTA so the live demo reproduces the
+# reported metrics in MODEL_INFO exactly. The HF Spaces free CPU tier handles
+# the full 9-pass ensemble + Grad-CAM in under 5 s.
 N_TTA_AUGMENTED = 8
 
 # Post-hoc temperature scaling fit by LBFGS on val_df (notebook calibration

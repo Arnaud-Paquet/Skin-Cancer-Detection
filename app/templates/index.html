@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DermaScan — Skin Lesion Classifier</title>
+    <title>NaeviScan — Skin Lesion Classifier</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -60,16 +60,17 @@
         <div class="max-w-7xl mx-auto px-7 py-4 flex items-center justify-between gap-5">
             <div class="flex items-center gap-3">
                 <svg width="32" height="32" viewBox="0 0 32 32" aria-hidden="true" class="flex-shrink-0">
+                    <!-- Rounded backdrop -->
                     <rect x="1" y="1" width="30" height="30" rx="9" fill="#eef4fb" stroke="#2563a8" stroke-width="1.5"/>
-                    <circle cx="16" cy="16" r="8.5" fill="none" stroke="#2563a8" stroke-width="1.8"/>
-                    <circle cx="16" cy="16" r="3.4" fill="#2563a8"/>
-                    <line x1="16" y1="2.5" x2="16" y2="6"    stroke="#2563a8" stroke-width="1.8" stroke-linecap="round"/>
-                    <line x1="16" y1="26"  x2="16" y2="29.5" stroke="#2563a8" stroke-width="1.8" stroke-linecap="round"/>
-                    <line x1="2.5" y1="16" x2="6"  y2="16"   stroke="#2563a8" stroke-width="1.8" stroke-linecap="round"/>
-                    <line x1="26"  y1="16" x2="29.5" y2="16" stroke="#2563a8" stroke-width="1.8" stroke-linecap="round"/>
+                    <!-- Dermatoscope viewing ring -->
+                    <circle cx="16" cy="16" r="9" fill="none" stroke="#2563a8" stroke-width="1.8"/>
+                    <!-- Asymmetric naevus: a tilted main blob plus a small satellite,
+                         echoing the irregular morphology the model looks for. -->
+                    <ellipse cx="15" cy="16.8" rx="4" ry="2.8" transform="rotate(-25 15 16.8)" fill="#2563a8"/>
+                    <circle cx="18.8" cy="14.2" r="1.4" fill="#2563a8"/>
                 </svg>
                 <div class="flex flex-col leading-none">
-                    <span class="font-bold text-[18px] tracking-tight">DermaScan</span>
+                    <span class="font-bold text-[18px] tracking-tight">NaeviScan</span>
                     <span class="font-mono text-[10.5px] text-ink-mute tracking-wide mt-0.5">lesion classifier</span>
                 </div>
             </div>
@@ -318,11 +319,11 @@
         <div class="max-w-7xl mx-auto px-7 py-6 flex flex-wrap gap-4 items-center justify-between">
             <div class="max-w-2xl text-xs text-ink-mute leading-relaxed">
                 <strong class="font-semibold text-ink-soft">Disclaimer.</strong>
-                DermaScan is an academic machine-learning demonstration. It is <em>not</em> a medical device,
+                NaeviScan is an academic machine-learning demonstration. It is <em>not</em> a medical device,
                 provides no diagnosis, and must not replace professional evaluation. If you are concerned about a skin lesion, see a dermatologist.
             </div>
             <div class="font-mono text-[11.5px] text-ink-mute text-right">
-                <div>DermaScan · ConvNet research project</div>
+                <div>NaeviScan · ConvNet research project</div>
                 <div class="mt-0.5">© 2026</div>
             </div>
         </div>
