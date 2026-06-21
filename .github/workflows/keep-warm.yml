@@ -1,0 +1,29 @@
+name: Keep HF Space awake
+
+# Pings the deployed NaeviScan Hugging Face Space every 4 hours so it never
+# falls asleep — recruiters clicking the portfolio link always hit a warm
+# instance. The workflow is free for public repos and emails on failure,
+# so it doubles as a basic uptime monitor.
+
+on:
+  schedule:
+    # Every 4 hours, at minute 0. UTC.
+    - cron: '0 */4 * * *'
+  workflow_dispatch: {}   # Allows manual triggering from the Actions tab
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    timeout-minutes: 2
+    steps:
+      - name: Ping NaeviScan Space
+        run: |
+          URL="https://arnaudpaquet-naeviscan.hf.space/"
+          echo "Pinging $URL"
+          HTTP_CODE=$(curl -s -o /dev/null -w "%{http_code}" --max-time 60 "$URL")
+          echo "HTTP status: $HTTP_CODE"
+          if [ "$HTTP_CODE" -ne 200 ]; then
+            echo "::error::Space returned $HTTP_CODE — investigate at https://huggingface.co/spaces/Arnaud-Paquet/naeviscan"
+            exit 1
+          fi
+          echo "Space is awake."
